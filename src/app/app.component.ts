@@ -25,4 +25,19 @@ export class AppComponent implements OnInit {
       },
     });
   }
+
+  search(name: string) {
+    if (name) {
+      this.http.get(`https://restcountries.com/v3.1/name/${name}`).subscribe({
+        next: (res) => {
+          this.countryData = res;
+        },
+        error: (err) => {
+          console.log('Something went wrong', err);
+        },
+      });
+    } else {
+      this.getData();
+    }
+  }
 }
